@@ -1,0 +1,199 @@
+process_only_first_file: false
+
+src_csv_folder: "/Fracking/fracfocuscsv"
+tgt_csv_folder: "/Fracking/fracfocuscsv/xlated"
+toxicities_folder: "toxicities"
+
+src_file_pattern: "FracFocusRegistry_"
+
+hex_digest_col_name: &hex_digest_alias
+  "hex_digest"
+
+bool_dict: &bool_dict_alias
+  "False": 0
+  "True": 1
+
+tgt_src_col_xlations:
+  disclosure_key:
+    data_type: str
+    src_col_name: UploadKey
+  job_bgn_date:
+    data_type: date
+    date_fmt_src: "%m/%d/%Y %H:%M:%S %p"
+    date_fmt_tgt: "%Y-%m-%d"
+    src_col_name: JobStartDate
+  job_end_date:
+    data_type: date
+    date_fmt_src: "%m/%d/%Y %H:%M:%S %p"
+    date_fmt_tgt: "%Y-%m-%d"
+    src_col_name: JobEndDate
+  api_nbr:
+    data_type: str
+    src_col_name: APINumber
+  state_nbr:
+    data_type: str
+    src_col_name: StateNumber
+  county_nbr:
+    data_type: str
+    src_col_name: CountyNumber
+  operator_name:
+    data_type: str
+    src_col_name: OperatorName
+  well_name:
+    data_type: str
+    src_col_name: WellName
+  latitude:
+    data_type: double
+    src_col_name: Latitude
+  longitude:
+    data_type: double
+    src_col_name: Longitude
+  projection:
+    data_type: str
+    src_col_name: Projection
+  total_vertical_depth:
+    data_type: str
+    src_col_name: TVD
+  total_base_water_volume:
+    data_type: str
+    src_col_name: TotalBaseWaterVolume
+  total_base_non_water_volume:
+    data_type: str
+    src_col_name: TotalBaseNonWaterVolume
+  state_name:
+    data_type: str
+    src_col_name: StateName
+  county_name:
+    data_type: str
+    src_col_name: CountyName
+  frac_focus_version:
+    data_type: str
+    src_col_name: FFVersion
+  federal_well:
+    data_type: bool
+    bool_dict: *bool_dict_alias
+    src_col_name: FederalWell
+  indian_well:
+    data_type: bool
+    bool_dict: *bool_dict_alias
+    src_col_name: IndianWell
+  source:
+    data_type: str
+    src_col_name: Source
+  dt_mod:
+    data_type: str
+    src_col_name: DTMOD
+  purpose_key:
+    data_type: str
+    src_col_name: PurposeKey
+  trade_name:
+    data_type: str
+    src_col_name: TradeName
+  supplier:
+    data_type: str
+    src_col_name: Supplier
+  purpose:
+    data_type: str
+    src_col_name: Purpose
+  system_approach:
+    data_type: str
+    src_col_name: SystemApproach
+  is_water:
+    data_type: str
+    src_col_name: IsWater
+  purpose_percent_hf_job:
+    data_type: str
+    src_col_name: PurposePercentHFJob
+  purpose_ingredient_msds:
+    data_type: str
+    src_col_name: PurposeIngredientMSDS
+  ingredient_key:
+    data_type: str
+    src_col_name: IngredientKey
+  ingredient_name:
+    data_type: str
+    src_col_name: IngredientName
+  cas_nbr:
+    data_type: str
+    src_col_name: CASNumber
+  percent_high_additive:
+    data_type: double
+    src_col_name: PercentHighAdditive
+  percent_hf_job:
+    data_type: double
+    src_col_name: PercentHFJob
+  ingredient_comment:
+    data_type: str
+    src_col_name: IngredientComment
+  ingredient_msds:
+    data_type: bool
+    bool_dict: *bool_dict_alias
+    src_col_name: IngredientMSDS
+  mass_ingredient:
+    data_type: str
+    src_col_name: MassIngredient
+  claimant_company:
+    data_type: str
+    src_col_name: ClaimantCompany
+  *hex_digest_alias:
+    data_type: str
+    src_col_name: null
+
+disclosure_file_info:
+  base_name: disclosures
+  col_names: [
+    disclosure_key,
+    job_bgn_date,
+    job_end_date,
+    api_nbr,
+    state_nbr,
+    county_nbr,
+    operator_name,
+    well_name,
+    latitude,
+    longitude,
+    projection,
+    total_vertical_depth,
+    total_base_water_volume,
+    total_base_non_water_volume,
+    state_name,
+    county_name,
+    frac_focus_version,
+    federal_well,
+    indian_well,
+    source,
+    dt_mod,
+    *hex_digest_alias
+  ]
+
+purpose_file_info:
+  base_name: purposes
+  col_names: [
+    disclosure_key,
+    purpose_key,
+    trade_name,
+    supplier,
+    purpose,
+    system_approach,
+    is_water,
+    purpose_percent_hf_job,
+    purpose_ingredient_msds,
+    *hex_digest_alias
+  ]
+
+ingredient_file_info:
+  base_name: ingredients
+  col_names: [
+    disclosure_key,
+    purpose_key,
+    ingredient_key,
+    ingredient_name,
+    cas_nbr,
+    percent_high_additive,
+    percent_hf_job,
+    ingredient_comment,
+    ingredient_msds,
+    mass_ingredient,
+    claimant_company,
+    *hex_digest_alias
+  ]
